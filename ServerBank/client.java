@@ -7,13 +7,13 @@ import java.net.*;
 
 public class client{
     public static void main(String[] args) throws IOException{
-        InetAddress addr = InetAddress.getByName(null); 
+        InetAddress addr = InetAddress.getByName(null); //null per localhost 
         Socket socket = null; 
         BufferedReader in = null, stdIn= null; 
         PrintWriter out = null;
 
         try {
-            socket = new Socket(addr, 7774); 
+            socket = new Socket(addr, 7777); 
             System.out.println("Started...\n"); 
 
             //IN legge da server 
