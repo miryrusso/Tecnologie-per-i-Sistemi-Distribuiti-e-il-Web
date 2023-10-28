@@ -12,6 +12,8 @@ II comportamento del thread tk (k=0, 1) è il seguente:
 se volete, per comodità di visualizzazione).
 NB: per il thread k, l'altro thread è 1-k.
  */
+package Gioco_Oca;
+
 public class app {
     public static void main(String [] args) throws Exception{
         Game g = new Game();

@@ -1,3 +1,5 @@
+package Gioco_Oca;
+
 public class Player extends Thread {
     int position = 0;
     int index; // Index of the Thread
