@@ -1,7 +1,8 @@
 /**
- * Realizzare un server che tiene traccia della disponibilità di 10 libri, che possono essere disponibili o in prestito;
-	riceve delle richieste da parte dei client del tipo "titolo del libro"
-	e risponde "Disponibile", "In prestito" o "Inesistente" a seconda del titolo richiesto.
+ * Realizzare un server che tiene traccia della disponibilità di 10 libri, che possono essere disponibili 
+ * o in prestito;
+ * Riceve delle richieste da parte dei client del tipo "titolo del libro"
+ * e risponde "Disponibile", "In prestito" o "Inesistente" a seconda del titolo richiesto.
 
 */
 
@@ -12,7 +13,7 @@
 #include <string.h>
 #include <arpa/inet.h>
 
-#define PORT 7773
+#define PORT 7776
 #define IP "127.0.0.1"
 #define MAX_BUFFER 1024
 #define MAX_BOOKS 10
@@ -83,31 +84,30 @@ int main(int argc, char **argv){
         }
 
         //punto A
-        printf("[MESSAGE TEXT] %s \n", buffer); 
         buffer[n] = '\0';
-        printf("Qui ci sono??? \n");
+        printf("[MESSAGE TEXT] %s \n", buffer); 
+        char buffer2[MAX_BUFFER]; 
 
         for(int i = 0; i< MAX_BOOKS; i++){
-            printf("Qui ci sono??? P2 \n");
-
-            if(strcmp(books[i].title, buffer) == 0){
+            printf("%s \n%s\n", books[i].title, buffer); 
+            if(strstr(books[i].title, buffer) != NULL){
                 printf("Abbiamo trovato il libro..\n ");
                 if(books[i].disponibile){
                     books[i].disponibile = 0; 
-                    sprintf(buffer, "Disponibile \n"); 
+                    sprintf(buffer2, "Disponibile \n"); 
                 } else { 
-                    sprintf(buffer, "In prestito... \n"); 
+                    sprintf(buffer2, "In prestito... \n"); 
                 }
                 break; 
                 
             }else{
                 printf("Non abbiamo trovato il libro..\n ");
-                sprintf(buffer, "Inesistente \n");
+                sprintf(buffer2, "Inesistente \n");
             }
         }
 
         //punto B 
-        write(connectionSocket, &buffer, strlen(buffer));        
+        write(connectionSocket, &buffer2, strlen(buffer2));        
     }
 
     close(s); 
