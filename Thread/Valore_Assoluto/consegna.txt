@@ -2,7 +2,7 @@
 
 ### Tempo a disposizione: 45 minuti
 
-#### File da consegnare: Tutti i file sorgente prodotti (C/C++ o Java)
+#### File da consegnare: Tutti i file sorgente prodotti Java
 
 Scrivere in C/C++ o in Java un programma con due thread **T1** e **T2**. 
 I thread hanno una **variabile condivisa x** inizializzata con un intero compreso tra 0 e 10 (*estremi inclusi*).
