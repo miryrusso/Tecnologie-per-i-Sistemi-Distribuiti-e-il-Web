@@ -1,3 +1,4 @@
+package Socket.ServerBank;
 /**
  * Compilazione -> javac client.java
  * Esecuzione -> java client
