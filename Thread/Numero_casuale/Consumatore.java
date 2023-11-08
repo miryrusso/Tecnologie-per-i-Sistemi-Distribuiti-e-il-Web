@@ -30,12 +30,12 @@ public class Consumatore extends Thread {
                  
                 n.setVar((n.getVar() * n.getVar()));
                 stampa_numero = n.getVar();
-                System.out.println("[NUMERO PARI] - NUMERO GENERATO " + stampa_numero); 
+                System.out.println("[NUMERO PARI] - QUADRATO :  " + stampa_numero); 
 
             }else if(n.getVar() % 2 != 0){
                 n.setVar((n.getVar() * 2));
                 stampa_numero = n.getVar();
-                System.out.println("[NUMERO DISPARI] - NUMERO GENERATO " + stampa_numero); 
+                System.out.println("[NUMERO DISPARI] - DOPPIO : " + stampa_numero); 
             }
 
             try{
