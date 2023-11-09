@@ -17,7 +17,7 @@ public class client {
         try{
             s = new Socket(addr, 7777); 
             in = new BufferedReader(new InputStreamReader(s.getInputStream())); 
-            out = new PrintWriter(s.getOutputStream()); 
+            out = new PrintWriter(s.getOutputStream(),true); 
             stdIO = new BufferedReader(new InputStreamReader(System.in)); 
 
             String userInput; 
