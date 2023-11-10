@@ -61,7 +61,7 @@ int main(int argc, char **argv){
             exit(-1); 
         }
 
-        // TELNET
+        /* TELNET
         buffer[n] = '\0'; 
         printf("[STAMPO BUFFER IN RICEZIONE %s \n", buffer); 
         
@@ -73,11 +73,11 @@ int main(int argc, char **argv){
             }
 
             sprintf (responce, "Vero"); 
-        }
+        }*/
         
 
 
-        /* PROPRIO SERVER
+        /* PROPRIO SERVER */
         printf("[STAMPO BUFFER IN RICEZIONE %s \n", buffer); 
 
           for(int i = 0 ; i< n - 2; i++){
@@ -88,13 +88,15 @@ int main(int argc, char **argv){
             }
 
             sprintf (responce, "Vero"); 
+            sprintf (responce, "Vero"); 
         }
 
-        responce[n-1] = '\n'; 
-        responce[n] = '\0'; 
+        //responce[n-1] = '\r\n'; 
+        //responce[n] = '\0'; 
+        responce[strcspn(responce, "\0")] = '\n';
 
 
-        */
+
         printf("BUFFER DI RISPOSTA %s \n", responce); 
         write(conn_accept, &responce, strlen(responce)); 
         memset(&responce, 0 , strlen(responce)); 

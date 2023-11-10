@@ -10,15 +10,15 @@ public class Threadt1 extends Thread {
     }
 
     /**
-     * Il thread **T1** ha una **variabile privata m** ed esegue un ciclo infinito, comportandosi in ciascun ciclo come segue:
-- Attende 100ms
-- Genera un valore casuale intero compreso tra 0 e 10 (estremi inclusi) e lo memorizza in **m**
-- Se **x** è uguale a `-1` termina l'esecuzione
-- Altrimenti, confronta m con la variabile condivisa **x**:
-- Se **m** e **x** coincidono stampa un messaggio "RISPOSTA CORRETTA", setta **x** a `-1` e termina l'esecuzione
-- Se la differenza in valore assoluto tra **m** ed **x** è **maggiore di 5** stampa il messaggio "risposta MOLTO sbagliata" 
-e si mette in attesa
-- Altrimenti, stampa il messaggio "risposta sbagliata"
+    * Il thread **T1** ha una **variabile privata m** ed esegue un ciclo infinito, comportandosi in ciascun ciclo come segue:
+        - Attende 100ms
+        - Genera un valore casuale intero compreso tra 0 e 10 (estremi inclusi) e lo memorizza in **m**
+        - Se **x** è uguale a `-1` termina l'esecuzione
+        - Altrimenti, confronta m con la variabile condivisa **x**:
+        - Se **m** e **x** coincidono stampa un messaggio "RISPOSTA CORRETTA", setta **x** a `-1` e termina l'esecuzione
+        - Se la differenza in valore assoluto tra **m** ed **x** è **maggiore di 5** stampa il messaggio "risposta MOLTO sbagliata" 
+        e si mette in attesa
+        - Altrimenti, stampa il messaggio "risposta sbagliata"
 
      */
 
