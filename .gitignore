@@ -2,4 +2,5 @@
 build/
 *.class
 *.vscode
+php_examples/
 
