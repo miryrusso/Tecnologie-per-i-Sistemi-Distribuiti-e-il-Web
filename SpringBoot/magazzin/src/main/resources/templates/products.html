@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head>
+        <title>Products</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+</head>
+<body>
+    Ther are <span th:text="${#lists.size(products)}"/> product availables
+    <h1>Products</h1>
+    <p th:each="product:${products}">
+        <span th:text=${product.name}>Name</span> 
+        [<span th:text=${product.id}>id</span>] 
+        € <span th:text=${product.price}>price</span> 
+        n. <span th:text=${product.quantity}>qta</span>
+        <a th:href="@{/product/{id}(id = ${product.id})}"> Edit</a>
+        <a th:href="@{/product/delete/{id}(id = ${product.id})}"> Delete</a>
+    </p>
+    <h1>Search by product name</h1>
+    <form th:action="@{/products/searchByName}" method="get">
+        <input type="text" name="keyword" id="keyword" th:value="${keyword}"/>
+        <input type="submit"/>
+    </form>
+    <h1>Back office </h1>
+    <p><a href="/product">Create a new product </a> </p>
+</body>
+</html>
