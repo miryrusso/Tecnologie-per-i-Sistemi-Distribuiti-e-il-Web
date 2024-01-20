@@ -1,4 +1,4 @@
-## LARAVEL scheme
+## LARAVEL SCHEME
   - Install Composer & Laravel
   - Create new project : ``` laravel new name_project ```
   - Set own database on file *.env* 
