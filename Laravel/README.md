@@ -1,2 +1,2 @@
 ## LARAVEL 
-  - Install Compeser & Laravel
+  - Install Composer & Laravel
