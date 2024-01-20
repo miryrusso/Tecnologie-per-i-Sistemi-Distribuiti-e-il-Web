@@ -14,4 +14,5 @@ Ecco una panoramica degli argomenti trattati all'interno di questa repository:
 - Web services: REST con JSON
 - Sviluppo in PHP
 - Sviluppo di API REST con Spring Boot
-- Larav
+- Laravel (CRUD operations)
+- SpringBoot (CRUD operations)
