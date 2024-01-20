@@ -19,5 +19,3 @@ export "PATH=~/.config/composer/vendor/bin:$PATH"
     
     
     artisan serve --port=8001 --host=0.0.0.0
-    
-APPUNTI DI OGNI LEZIONE SU home/my_app
