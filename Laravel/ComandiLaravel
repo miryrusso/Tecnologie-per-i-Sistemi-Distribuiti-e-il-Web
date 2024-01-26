@@ -4,10 +4,11 @@ php artisan make:model nome_tabella -mcr
 php artisan migrate
 In database inserire chiave esterna:
 $table->unsignedBigInteger("team");
-    $table->foreign("team")->references("id")->on("teams")->onDelete("cascade");
+    $table->foreign("team")->references("id")
+    ->on("teams")->onDelete("cascade");
 
 [Tabella Uno Model]
-    protected $fillable = ['nome', 'stadio', 'anno_fondazione'];
+    protected $fillable = ['nome', 'stadio'];
 
     public function players()
     {
@@ -15,7 +16,7 @@ $table->unsignedBigInteger("team");
     }
  
 [Tabella Molti Model]
-    protected $fillable = ['nome', 'n_maglia', 'team'];
+    protected $fillable = ['nome', 'team'];
 
     public function team()
     {
