@@ -23,3 +23,286 @@ $table->unsignedBigInteger("team");
         return $this->belongsTo(Team::class);
     }
 
+[Index generale]
+    <html>
+        <body>
+            <h1> Benvenuti </h1>
+            <a href="{{ route('players.index') }}"><button>Players</button></a>
+            <a href="{{ route('teams.index') }}"><button>Teams</button></a>
+        </body>
+    </html>
+
+[Molti Index dentro la cartella "molti"]
+    <html>
+    <body>
+        <h1>Elenco dei giocatori</h1>
+        @foreach ($players as $player)
+            <p>Player ID: {{$player->id}}</p>
+            <li>Nome: {{$player->nome}}</li>
+            <li>Numero Maglia: {{$player->n_maglia}}</li>
+            <li>Squadra: {{$player->team}}</li>
+
+            <a href="{{ route('players.show', $player->id) }}"><button>Mostra</button></a>
+            <a href="{{ route('players.edit', $player->id) }}"><button>Modifica</button></a>
+
+        @endforeach
+
+        <a href="{{ route('players.create') }}">Crea Nuovo Gioco</a>
+
+        <br><br><a href="../"><button>Home</button></a>
+    </body>
+    </html>
+
+[Molti create]
+    <html>
+        <body>
+            <h1>Crea Giocatore</h1>
+
+            <form action="{{ route('players.store') }}" method="POST">
+                @csrf
+
+                Nome:<input type="text" name="nome" required>
+                Numero della maglia:<input type="text" name="n_maglia" required>
+                Squadra:
+                <select name="team" required>
+                    @foreach($teams as $team)
+                        <option value="{{ $team->id }}">{{ $team->nome }}</option>
+                    @endforeach
+                </select>
+                <button type="submit">Crea Giocatore</button>
+            </form>
+        </body>
+    </html>
+
+[Uno index]
+    <html>
+        <body>
+            <h1> Elenco dei Teams </h1>
+            @foreach ($teams as $team)
+                <p>Teams ID: {{$team->id}}</p>
+                <li>Nome: {{$team->nome}}</li>
+                
+                <a href = "{{ route('teams.show', $team->id)}}">Mostra</a>
+                <a href = "{{ route('teams.edit', $team->id)}}">Modificad</a>
+            @endforeach
+
+            <a href="{{ route('teams.create') }}"><button> Nuova Squadra</button></a>
+            <br><br><a href="../"><button>Home</button></a>
+        </body>
+    </html>
+
+[Uno Create]
+    <html>
+        <body>
+            <h1>Inserisci un nuovo Team</h1>
+            <form action = "{{ route('teams.store')}}" method = "POST">
+                @csrf
+                Nome : <input type = "text" name = "nome" placeholder="Inserisci nome" required>
+                Stadio : <input type = "text" name = "stadio" placeholder="Inserisci Stadio" required>
+                <button type = "submit">Crea Squadra</button>
+            </form>
+        </body>
+    </html>
+
+[MoltiController]
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Player;
+use App\Models\Team;
+use Illuminate\Http\Request;
+
+class PlayerController extends Controller
+{
+    public function index()
+    {
+        return view('players.index', ["players" => Player::all()]);
+    }
+
+    public function create()
+    {
+        return view('players.create', ["teams" => Team::all()]);
+    }
+
+    public function store(Request $request)
+    {
+        Player::create($request->all());
+        return redirect()->route('players.index');
+    }
+}
+
+[Uno Controller]
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Team;
+use Illuminate\Http\Request;
+
+class TeamController extends Controller
+{
+    public function index()
+    {
+        return view('teams.index', ["teams" => Team::all()]);
+    }
+
+    public function create()
+    {
+        return view('teams.create');
+    }
+
+    public function store(Request $request)
+    {
+        Team::create($request->all());
+        return redirect()->route('teams.index');
+    }
+}
+
+
+[Uno-show-delete Controller]
+    public function show(Team $team)
+        {
+            return view('teams.show', ['team' => $team]);
+        }
+
+    public function destroy(Team $team)
+        {
+            $team->delete();
+            return redirect()->route('teams.index');
+        }
+    
+    
+[Uno-show.blade]
+<html>
+    <body>
+        <h1>Dettagli Squadra</h1>
+
+        <p>ID: {{ $team->id }}</p>
+        <p>Nome: {{ $team->nome }}</p>
+        <p>Stadio: {{ $team->stadio}}</p>
+        <p>Anno di fondazione: {{ $team->anno_fondazione}}</p>
+
+        <form action="{{ route('teams.destroy', $team->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Elimina</button>
+        </form>
+
+        <a href="{{ route('teams.index') }}"><button>Torna all'elenco</button></a>
+    </body>
+</html>
+
+[Uno-edit-update Controller]
+    public function edit(Team $team)
+        {
+            return view('teams.edit', ['team' => $team]);
+        }
+
+        public function update(Request $request, Team $team)
+        {
+            $team->update($request->all());
+            return redirect()->route('teams.index');
+        }
+
+[Uno - edit.blade.php]
+    <html>
+        <body>
+            <h1>Modifica Squadra</h1>
+
+            <form action="{{ route('teams.update', $team->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                Nome:<input type="text" name="nome" value="{{ $team->nome }}">
+                <button type="submit">Modifica Squadra</button>
+                <a href="{{ route('teams.index') }}"><button>Torna all'elenco</button></a>
+            </form>
+        </body>
+    </html>
+
+[Molti -show-delete-Controller]
+     public function show(Player $player)
+        {
+            return view('players.show', ['player' => $player]);
+        }
+    public function destroy(Player $player)
+        {
+            $player->delete();
+            return redirect()->route('players.index');
+        }
+        
+[Molti -update Controller]
+
+    public function edit(Player $player)
+        {
+            return view('players.edit', ['player' => $player, 'teams' => Team::all()]);
+        }
+
+        public function update(Request $request, Player $player)
+        {
+            $player->update($request->all());
+            return redirect()->route('players.index');
+        }
+[Molti -show.blade.php]
+<html>
+    <body>
+        <h1>Dettagli Giocatore</h1>
+
+        <p>ID: {{ $player->id }}</p>
+        <p>Nome: {{ $player->nome }}</p>
+        <p>Squadra: {{ $player->team }}</p>
+
+        <form action="{{ route('players.destroy', $player->id) }}" method="POST">
+            @csrf
+            @method('delete')
+            <button type="submit">Elimina</button>
+        </form><br>
+
+        <br><a href="{{ route('players.index') }}"><button>Torna all'elenco</button></a>
+    </body>
+</html>
+
+[Molti edit.php]
+<html>
+    <body>
+    <form action="{{ route('players.update', $player->id) }}" method="post">
+        @csrf
+        @method('put') <!--Simula il metodo put perchè alcuni browser hanno solo i metodi Get e POST-->
+
+        Nome:<input type="text" name="nome" value="{{ $player->nome }}" required>
+        Numero di maglia:<input type="text" name="n_maglia" value="{{ $player->n_maglia }}" required>
+        Squadra:
+        <select name="team" required>
+            @foreach($teams as $team)
+                <option value="{{ $team->id }}">{{ $team->nome }}</option>
+            @endforeach
+        </select>
+
+        <button type="submit">Modifica Gioco</button>
+
+        <a href="{{ route('players.index') }}"><button>Torna all'elenco</button></a>
+    </form>
+    </body>
+</html>
+
+
+[ELIMINARE TUTTI I CAMPI]
+
+[WEB.PHP] 
+Route::delete('/cars', [CarsController::class, 'destroyAll'])->
+    name('cars.destroyAll');
+[CONTROLLER]
+    public function destroyAll(){
+            $cars = Cars::all();
+            foreach($cars as $car)
+                $car->delete();
+            return redirect()->route('cars.index');
+        }
+[INDEX]
+<!-- cars/index.blade.php -->
+    <form action = "{{ route('cars.destroyAll') }}" method = "post">
+        @csrf
+        @method('DELETE')
+        <button>Elimina tutti i campi</button>
+    </form>
