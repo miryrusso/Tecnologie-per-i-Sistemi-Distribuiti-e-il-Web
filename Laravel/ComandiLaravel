@@ -1,0 +1,24 @@
+export "PATH=~/.config/composer/vendor/bin:$PATH
+Laravel new Project
+php artisan make:model nome_tabella -mcr
+php artisan migrate
+In database inserire chiave esterna:
+$table->unsignedBigInteger("team");
+    $table->foreign("team")->references("id")->on("teams")->onDelete("cascade");
+
+[Tabella Uno Model]
+    protected $fillable = ['nome', 'stadio', 'anno_fondazione'];
+
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
+ 
+[Tabella Molti Model]
+    protected $fillable = ['nome', 'n_maglia', 'team'];
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
